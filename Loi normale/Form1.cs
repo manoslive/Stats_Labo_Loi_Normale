@@ -42,7 +42,13 @@ namespace Loi_normale
             else if(prob == 1)
                 probFini += "%";
             else
-                probFini = probFini.Substring(0, probFini.IndexOf('.') + 3) + "%";
+            {
+                if(probFini.IndexOf('.') != -1)
+                    probFini = probFini.Substring(0, (probFini.IndexOf('.') + 3)) + "%";
+                else
+                    probFini = probFini.Substring(0, (probFini.IndexOf(',') + 3)) + "%";
+            }
+                
             return probFini;
         }
         public void ImportTable()
