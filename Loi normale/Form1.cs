@@ -10,12 +10,12 @@ using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Loi_normale
 {
     public partial class Form1 : Form
     {
-        String coteZ;
         public Form1()
         {
             InitializeComponent();
@@ -32,8 +32,19 @@ namespace Loi_normale
             TB_Moyenne.Text = "";
             TB_Max.Text = "";
             TB_Reponse.Text = "";
+            LB_Erreur.Text = "";
         }
-
+        public string FinaliserProb(double prob)
+        {
+            string probFini = (prob * 100).ToString();
+            if (prob == 0)
+                probFini += "%";
+            else if(prob == 1)
+                probFini += "%";
+            else
+                probFini = probFini.Substring(0, probFini.IndexOf('.') + 3) + "%";
+            return probFini;
+        }
         public void ImportTable()
         {
             System.Data.DataTable dt = new System.Data.DataTable("dataTable");
@@ -55,13 +66,6 @@ namespace Loi_normale
                 dt.Columns.Add(new DataColumn((ExRange.Cells[1, Cnum] as Excel.Range).Value2.ToString()));
             }
             dt.AcceptChanges();
-
-            //string[] columnNames = new String[dt.Columns.Count];
-            //for (int i = 0; i < dt.Columns.Count; i++)
-            //{
-            //    columnNames[0] = dt.Columns[i].ColumnName;
-            //}
-            //string[] columnNames = (from dc in dt.Columns.Cast<DataColumn>() select dc.ColumnName).ToArray();
 
             for (int Rnum = 1; Rnum <= ExRange.Rows.Count; Rnum++)
             {
@@ -88,7 +92,11 @@ namespace Loi_normale
 
         private void BTN_Calculer_Click(object sender, EventArgs e)
         {
-            bool sup = false, inf = false;
+            TB_Reponse.Text = "";
+            LB_Erreur.Text = "";
+
+            bool sup = false, inf = false, erreur=false;
+            double probabiblite = 0;
             double min = 0;
             double max = 0;
             if (TB_Min.Text == "")
@@ -110,46 +118,60 @@ namespace Loi_normale
 
             if (Za == 0 && Zb > 0 && !sup && !inf) //a
             {
-                TB_Reponse.Text = TrouverProb(Zb).ToString();
+                if (Zb > 4)
+                    probabiblite = 0.5;
+                else
+                    probabiblite = TrouverProb(Zb);
             }
             else if (Za < 0 && Zb == 0 && !sup && !inf) //b
             {
-                TB_Reponse.Text = TrouverProb(Za * -1).ToString();
+                probabiblite = TrouverProb(Za * -1);
             }
             else if (Za > 0 && Za <= 4 && Zb > 0 && Zb <= 4 && !sup && !inf) //c
             {
-                TB_Reponse.Text = (TrouverProb(Zb) - TrouverProb(Za)).ToString();
+                probabiblite = (TrouverProb(Zb) - TrouverProb(Za));
             }
             else if (Za < 0 && Zb < 0 && !sup && !inf) //d
             {
-                TB_Reponse.Text = (TrouverProb(Za * -1) - TrouverProb(Zb * -1)).ToString();
+                probabiblite = (TrouverProb(Za * -1) - TrouverProb(Zb * -1));
             }
-            else if (sup && Zb > 4 && !inf) //////////////inverser inf sup pt etre
+            else if (sup && !inf) //e
             {
-                TB_Reponse.Text = "0.5";
-            }
-            else if (sup && !inf) //e   //////////////inverser inf sup pt etre
-            {
-                if (Za < 0)
-                    TB_Reponse.Text = (TrouverProb(Za * -1) + 0.5).ToString();
+                if(Za > 0 && Za < 4)
+                    probabiblite = (0.5 - TrouverProb(Za));
+                else if (Za < 0 && Za > -4)
+                    probabiblite = (TrouverProb(Za * -1) + 0.5);
+                else if (Za <= -4)
+                    probabiblite = 1;
                 else
-                    TB_Reponse.Text = TrouverProb(Za).ToString();
+                    probabiblite = TrouverProb(Za);
             }
-            else if (inf && Za < -4 && !sup)//////////////inverser inf sup pt etre
+            else if (inf && !sup) //f
             {
-                TB_Reponse.Text = "0.5";
-            }
-            else if (inf && !sup) //f//////////////inverser inf sup pt etre
-            {
-                if (Zb < 0)
-                    TB_Reponse.Text = (0.5 - TrouverProb(Zb * -1)).ToString();
+                if (Zb > 0 && Zb < 4)
+                    probabiblite = (TrouverProb(Zb) + 0.5);
+                else if (Zb > 4)
+                    probabiblite = 1;
                 else
-                    TB_Reponse.Text = TrouverProb(Zb).ToString();
+                    probabiblite = (0.5 - TrouverProb(Zb * -1));
             }
             else if ((Za > 4 && Zb > 4) || (Za < -4 && Zb < -4) && !sup && !inf) //g
             {
-                TB_Reponse.Text = "0";
+                probabiblite = 0;
             }
+            else if(Za < 0 && Zb > 0 && !sup && !inf)
+            {
+                probabiblite = (TrouverProb(Za * -1) + TrouverProb(Zb));
+            }
+            else
+            {
+                TB_Reponse.Text = "";
+                LB_Erreur.Text = "Erreur: Valeurs incohérentes";
+                erreur = true;
+            }
+
+            if(!erreur)
+                TB_Reponse.Text = FinaliserProb(probabiblite);
         }
         public double TrouverProb(double coteZ)
         {
@@ -158,7 +180,7 @@ namespace Loi_normale
             {
                 if (Convert.ToDouble(DGV_Table.Rows[i].Cells[0].Value) != 0)
                 {
-                    if(coteZ.ToString().Length>=3)
+                    if (coteZ.ToString().Length >= 3)
                     {
                         if (Convert.ToDouble(DGV_Table.Rows[i].Cells[0].Value) == Convert.ToDouble(coteZ.ToString().Substring(0, 3)))
                             resA = i;
@@ -167,6 +189,19 @@ namespace Loi_normale
                     {
                         if (Convert.ToDouble(DGV_Table.Rows[i].Cells[0].Value) == Convert.ToDouble(coteZ.ToString().Substring(0, coteZ.ToString().Length)))
                             resA = i;
+                    }
+                }
+                else
+                {
+                    if (coteZ.ToString().Length >= 3)
+                    {
+                        if (Convert.ToDouble(DGV_Table.Rows[i].Cells[0].Value) == Convert.ToDouble(coteZ.ToString().Substring(0, 3)))
+                            resA = 1;
+                    }
+                    else
+                    {
+                        if (Convert.ToDouble(DGV_Table.Rows[i].Cells[0].Value) == Convert.ToDouble(coteZ.ToString().Substring(0, coteZ.ToString().Length)))
+                            resA = 1;
                     }
                 }
             }
@@ -181,11 +216,76 @@ namespace Loi_normale
                     }
                     else
                     {
-                        resB = 0;
+                        resB = 1;
                     }
                 }
             }
             return Convert.ToDouble(DGV_Table.Rows[resA].Cells[resB].Value);
+        }
+
+        private void TB_Min_TextChanged(object sender, EventArgs e)
+        {
+            if(CB_Inferieure.Checked)
+            {
+                if (Regex.IsMatch(TB_Max.Text, @"^([-]?\d*[.]?\d{1,2})$") && Regex.IsMatch(TB_Moyenne.Text, @"^([-]?\d*[.]?\d{1,2})$") && Regex.IsMatch(TB_Ecart.Text, @"^([-]?\d*[.]?\d{1,2})$"))
+                {
+                    BTN_Calculer.Enabled = true;
+                    LB_Erreur.Text = "";           
+                }
+                else
+                {
+                    BTN_Calculer.Enabled = false;
+                    LB_Erreur.Text = "Erreur: Valeurs incohérentes";
+                    TB_Reponse.Text = "";
+                }
+            }
+            else
+            {
+                if (Regex.IsMatch(TB_Min.Text, @"^([-]?\d*[.]?\d{1,2})$") && Regex.IsMatch(TB_Moyenne.Text, @"^([-]?\d*[.]?\d{1,2})$") && Regex.IsMatch(TB_Ecart.Text, @"^([-]?\d*[.]?\d{1,2})$"))
+                {
+                    BTN_Calculer.Enabled = true;
+                    LB_Erreur.Text = "";
+                }
+                else
+                {
+                    BTN_Calculer.Enabled = false;
+                    LB_Erreur.Text = "Erreur: Valeurs incohérentes";
+                    TB_Reponse.Text = "";
+                }
+            }
+
+        }
+
+        private void CB_Superieure_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CB_Superieure.Checked)
+            {
+                CB_Inferieure.Checked = false;
+                TB_Max.Text = "";
+                TB_Min.Enabled = true;
+                TB_Max.Enabled = false;
+            }
+            else
+            {
+                TB_Min.Enabled = true;
+                TB_Max.Enabled = true;
+            }
+        }
+
+        private void CB_Inferieure_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CB_Inferieure.Checked)
+            {
+                CB_Superieure.Checked = false;
+                TB_Min.Text = "";
+                TB_Min.Enabled = false;
+                TB_Max.Enabled = true;
+            }
+            else
+            {
+                TB_Min.Enabled = true;
+                TB_Max.Enabled = true;
+            }
         }
     }
 }
