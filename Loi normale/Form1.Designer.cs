@@ -46,41 +46,46 @@
             // 
             // TB_Moyenne
             // 
-            this.TB_Moyenne.Location = new System.Drawing.Point(249, 108);
+            this.TB_Moyenne.Location = new System.Drawing.Point(166, 70);
+            this.TB_Moyenne.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TB_Moyenne.Name = "TB_Moyenne";
-            this.TB_Moyenne.Size = new System.Drawing.Size(229, 26);
+            this.TB_Moyenne.Size = new System.Drawing.Size(154, 20);
             this.TB_Moyenne.TabIndex = 0;
             // 
             // TB_Ecart
             // 
-            this.TB_Ecart.Location = new System.Drawing.Point(249, 150);
+            this.TB_Ecart.Location = new System.Drawing.Point(166, 97);
+            this.TB_Ecart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TB_Ecart.Name = "TB_Ecart";
-            this.TB_Ecart.Size = new System.Drawing.Size(229, 26);
+            this.TB_Ecart.Size = new System.Drawing.Size(154, 20);
             this.TB_Ecart.TabIndex = 0;
             // 
             // LB_Moyenne
             // 
             this.LB_Moyenne.AutoSize = true;
-            this.LB_Moyenne.Location = new System.Drawing.Point(29, 111);
+            this.LB_Moyenne.Location = new System.Drawing.Point(19, 72);
+            this.LB_Moyenne.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LB_Moyenne.Name = "LB_Moyenne";
-            this.LB_Moyenne.Size = new System.Drawing.Size(186, 20);
+            this.LB_Moyenne.Size = new System.Drawing.Size(127, 13);
             this.LB_Moyenne.TabIndex = 2;
             this.LB_Moyenne.Text = "Moyenne de l\'échantillon:";
             // 
             // LB_Ecart
             // 
             this.LB_Ecart.AutoSize = true;
-            this.LB_Ecart.Location = new System.Drawing.Point(29, 153);
+            this.LB_Ecart.Location = new System.Drawing.Point(19, 99);
+            this.LB_Ecart.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LB_Ecart.Name = "LB_Ecart";
-            this.LB_Ecart.Size = new System.Drawing.Size(193, 20);
+            this.LB_Ecart.Size = new System.Drawing.Size(131, 13);
             this.LB_Ecart.TabIndex = 2;
             this.LB_Ecart.Text = "Écart type de l\'échantillon:";
             // 
             // BTN_Calculer
             // 
-            this.BTN_Calculer.Location = new System.Drawing.Point(368, 278);
+            this.BTN_Calculer.Location = new System.Drawing.Point(245, 181);
+            this.BTN_Calculer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTN_Calculer.Name = "BTN_Calculer";
-            this.BTN_Calculer.Size = new System.Drawing.Size(106, 31);
+            this.BTN_Calculer.Size = new System.Drawing.Size(71, 20);
             this.BTN_Calculer.TabIndex = 3;
             this.BTN_Calculer.Text = "Calculer";
             this.BTN_Calculer.UseVisualStyleBackColor = true;
@@ -88,9 +93,10 @@
             // 
             // BTN_Vider
             // 
-            this.BTN_Vider.Location = new System.Drawing.Point(246, 278);
+            this.BTN_Vider.Location = new System.Drawing.Point(164, 181);
+            this.BTN_Vider.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTN_Vider.Name = "BTN_Vider";
-            this.BTN_Vider.Size = new System.Drawing.Size(106, 31);
+            this.BTN_Vider.Size = new System.Drawing.Size(71, 20);
             this.BTN_Vider.TabIndex = 3;
             this.BTN_Vider.Text = "Vider";
             this.BTN_Vider.UseVisualStyleBackColor = true;
@@ -98,66 +104,73 @@
             // 
             // TB_Reponse
             // 
-            this.TB_Reponse.Location = new System.Drawing.Point(249, 189);
+            this.TB_Reponse.Location = new System.Drawing.Point(166, 123);
+            this.TB_Reponse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TB_Reponse.Name = "TB_Reponse";
-            this.TB_Reponse.Size = new System.Drawing.Size(229, 26);
+            this.TB_Reponse.Size = new System.Drawing.Size(154, 20);
             this.TB_Reponse.TabIndex = 0;
             // 
             // LB_Reponse
             // 
             this.LB_Reponse.AutoSize = true;
-            this.LB_Reponse.Location = new System.Drawing.Point(29, 190);
+            this.LB_Reponse.Location = new System.Drawing.Point(19, 123);
+            this.LB_Reponse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LB_Reponse.Name = "LB_Reponse";
-            this.LB_Reponse.Size = new System.Drawing.Size(78, 20);
+            this.LB_Reponse.Size = new System.Drawing.Size(53, 13);
             this.LB_Reponse.TabIndex = 2;
             this.LB_Reponse.Text = "Réponse:";
             // 
             // DGV_Table
             // 
+            this.DGV_Table.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.DGV_Table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Table.Location = new System.Drawing.Point(531, 18);
-            this.DGV_Table.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DGV_Table.ColumnHeadersVisible = false;
+            this.DGV_Table.Location = new System.Drawing.Point(354, 12);
             this.DGV_Table.Name = "DGV_Table";
-            this.DGV_Table.Size = new System.Drawing.Size(404, 286);
+            this.DGV_Table.Size = new System.Drawing.Size(269, 186);
             this.DGV_Table.TabIndex = 4;
             // 
             // TB_Min
             // 
-            this.TB_Min.Location = new System.Drawing.Point(249, 24);
+            this.TB_Min.Location = new System.Drawing.Point(166, 16);
+            this.TB_Min.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TB_Min.Name = "TB_Min";
-            this.TB_Min.Size = new System.Drawing.Size(229, 26);
+            this.TB_Min.Size = new System.Drawing.Size(154, 20);
             this.TB_Min.TabIndex = 0;
             // 
             // TB_Max
             // 
-            this.TB_Max.Location = new System.Drawing.Point(249, 66);
+            this.TB_Max.Location = new System.Drawing.Point(166, 43);
+            this.TB_Max.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TB_Max.Name = "TB_Max";
-            this.TB_Max.Size = new System.Drawing.Size(229, 26);
+            this.TB_Max.Size = new System.Drawing.Size(154, 20);
             this.TB_Max.TabIndex = 0;
             // 
             // LB_Min
             // 
             this.LB_Min.AutoSize = true;
-            this.LB_Min.Location = new System.Drawing.Point(29, 27);
+            this.LB_Min.Location = new System.Drawing.Point(19, 18);
+            this.LB_Min.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LB_Min.Name = "LB_Min";
-            this.LB_Min.Size = new System.Drawing.Size(76, 20);
+            this.LB_Min.Size = new System.Drawing.Size(122, 13);
             this.LB_Min.TabIndex = 2;
-            this.LB_Min.Text = "Minimum:";
+            this.LB_Min.Text = "Minimum / Supérieure à:";
             // 
             // LB_Max
             // 
             this.LB_Max.AutoSize = true;
-            this.LB_Max.Location = new System.Drawing.Point(29, 69);
+            this.LB_Max.Location = new System.Drawing.Point(19, 45);
+            this.LB_Max.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LB_Max.Name = "LB_Max";
-            this.LB_Max.Size = new System.Drawing.Size(80, 20);
+            this.LB_Max.Size = new System.Drawing.Size(118, 13);
             this.LB_Max.TabIndex = 2;
-            this.LB_Max.Text = "Maximum:";
+            this.LB_Max.Text = "Maximum / Inférieure à:";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 323);
+            this.ClientSize = new System.Drawing.Size(635, 210);
             this.Controls.Add(this.DGV_Table);
             this.Controls.Add(this.BTN_Vider);
             this.Controls.Add(this.BTN_Calculer);
@@ -171,6 +184,7 @@
             this.Controls.Add(this.TB_Min);
             this.Controls.Add(this.TB_Ecart);
             this.Controls.Add(this.TB_Moyenne);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Calculer loi normale";
             this.Load += new System.EventHandler(this.Form1_Load);
