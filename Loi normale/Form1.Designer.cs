@@ -126,7 +126,7 @@
             // 
             // BTN_Calculer
             // 
-            this.BTN_Calculer.Location = new System.Drawing.Point(388, 279);
+            this.BTN_Calculer.Location = new System.Drawing.Point(368, 279);
             this.BTN_Calculer.Name = "BTN_Calculer";
             this.BTN_Calculer.Size = new System.Drawing.Size(107, 31);
             this.BTN_Calculer.TabIndex = 3;
@@ -135,7 +135,7 @@
             // 
             // BTN_Vider
             // 
-            this.BTN_Vider.Location = new System.Drawing.Point(266, 279);
+            this.BTN_Vider.Location = new System.Drawing.Point(246, 279);
             this.BTN_Vider.Name = "BTN_Vider";
             this.BTN_Vider.Size = new System.Drawing.Size(107, 31);
             this.BTN_Vider.TabIndex = 3;
