@@ -15,6 +15,7 @@ namespace Loi_normale
 {
     public partial class Form1 : Form
     {
+        String coteZ;
         public Form1()
         {
             InitializeComponent();
@@ -84,6 +85,10 @@ namespace Loi_normale
         private void BTN_Vider_Click(object sender, EventArgs e)
         {
             ViderChamps();
+        }
+
+        private void BTN_Calculer_Click(object sender, EventArgs e)
+        {
         }
     }
 }
