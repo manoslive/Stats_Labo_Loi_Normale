@@ -44,9 +44,9 @@ namespace Loi_normale
             else
             {
                 if(probFini.IndexOf('.') != -1)
-                    probFini = probFini.Substring(0, (probFini.IndexOf('.') + 3)) + "%";
+                    probFini = probFini.Substring(0, (probFini.IndexOf('.') + 3)) + "%"; // Sur une version anglaise de windows, les . restent des .
                 else
-                    probFini = probFini.Substring(0, (probFini.IndexOf(',') + 3)) + "%";
+                    probFini = probFini.Substring(0, (probFini.IndexOf(',') + 3)) + "%"; // Sur une version française de windows, les . sont transformées en , FOR SOME REASON!!!!!!!!!!!
             }
                 
             return probFini;
