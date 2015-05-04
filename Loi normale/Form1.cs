@@ -168,7 +168,6 @@ namespace Loi_normale
                         if (Convert.ToDouble(DGV_Table.Rows[i].Cells[0].Value) == Convert.ToDouble(coteZ.ToString().Substring(0, coteZ.ToString().Length)))
                             resA = i;
                     }
-
                 }
             }
             for (int j = 1; j < DGV_Table.ColumnCount; j++)
